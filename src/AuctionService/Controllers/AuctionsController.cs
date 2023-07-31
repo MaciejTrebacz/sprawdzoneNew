@@ -52,4 +52,38 @@ public class AuctionsController : ControllerBase
             : BadRequest("Something wrong with saving");
     }
 
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateAuction(Guid id,UpdateAuctionDto updateAuctionDto)
+    {
+        var auctionToUpdate = await _context.Auctions
+            .Include(x => x.Motorcycle)
+            .FirstOrDefaultAsync(x => x.Id == id);
+        //TODO: check seller == username
+        if (auctionToUpdate == null) return NotFound();
+
+        _mapper.Map(updateAuctionDto, auctionToUpdate);
+        var result = await _context.SaveChangesAsync();
+
+        return result > 0
+            ? Ok()
+            : BadRequest("Something wrong with saving");
+
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteAuction(Guid id)
+    {
+        var auctionToDelete = await _context.Auctions.FindAsync(id);
+        if (auctionToDelete is null) return NotFound();
+        //TODO: check seller == username
+
+        _context.Auctions.Remove(auctionToDelete);
+        var result = await _context.SaveChangesAsync();
+
+        return result > 0
+            ? Ok()
+            : BadRequest("Something wrong with deleting");
+
+    }
+
 }
