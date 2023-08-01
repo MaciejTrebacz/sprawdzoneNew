@@ -31,23 +31,19 @@ namespace SearchService.Controllers
             query = searchParams.FilterBy switch
             {
                 "finished" => query.Match(x=>x.AuctionEnd < DateTime.UtcNow),
-                "endingSoon" => query
-                    .Match(x=>x.AuctionEnd < DateTime.UtcNow
-                        .AddDays(1) && x.AuctionEnd > DateTime.UtcNow),
+                "endingSoon" => query.Match(x=>x.AuctionEnd < DateTime.UtcNow.AddDays(1) && x.AuctionEnd > DateTime.UtcNow),
                 _ => query.Match(x=>x.AuctionEnd > DateTime.UtcNow)
             };
 
             if (!string.IsNullOrEmpty(searchParams.Seller))
             {
-                query.Match(Search.Full, searchParams.Seller);
                 query.Match(x=>x.Seller == searchParams.Seller);
             }
 
             if (!string.IsNullOrEmpty(searchParams.Winner))
             {
-                query.Match(Search.Full, searchParams.Winner).SortByTextScore();
+                query.Match(x => x.Winner == searchParams.Winner);
             }
-
 
             query.PageNumber(searchParams.PageNumber);
             query.PageSize(searchParams.PageSize);

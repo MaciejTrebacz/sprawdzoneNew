@@ -18,16 +18,16 @@ public class DbInitializer
             .Key(x => x.Color, KeyType.Text)
             .CreateAsync();
 
-        var count = await DB.CountAsync<Motorcycle>();
-        if (count ==0)
+        using var scope = app.Services.CreateScope();
+        
+        var httpClient = scope.ServiceProvider.GetRequiredService<AuctionSvcHttpClient>();
+        
+        var items = await httpClient.GetMotorcyclesForSearchDb();
+
+        Console.WriteLine(items.Count + "returned from auction service");
+
+        if (items.Count > 0)
         {
-            Console.WriteLine("No data- trying to seed....");
-
-            var itemData = await File.ReadAllTextAsync("Data/auctions.json");
-
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var items = JsonSerializer.Deserialize<List<Motorcycle>>(itemData, options);
-
             await DB.SaveAsync(items);
         }
     }
