@@ -3,6 +3,8 @@ using AuctionService.DTOs;
 using AuctionService.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Contracts;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +16,13 @@ public class AuctionsController : ControllerBase
 {
     private readonly SprawdzoneDbContext _context;
     private readonly IMapper _mapper;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public AuctionsController(SprawdzoneDbContext context,IMapper mapper)
+    public AuctionsController(SprawdzoneDbContext context,IMapper mapper,IPublishEndpoint publishEndpoint)
     {
         _context = context;
         _mapper = mapper;
+        _publishEndpoint = publishEndpoint;
     }
 
     [HttpGet]
@@ -54,12 +58,26 @@ public class AuctionsController : ControllerBase
     {
         var auction = _mapper.Map<Auction>(createAuctionDto);
         // TODO: Add current user as seller
+        
         await _context.Auctions.AddAsync(auction);
+
+        var newAuction = _mapper.Map<AuctionDto>(auction);
+
+        await _publishEndpoint.Publish(_mapper.Map<AuctionCreated>(newAuction));
+        // now publishing is transaction and using entity framework to save messages in postgresql so if we cannot save changes something went wrong here but our databases are SAME
         var result = await _context.SaveChangesAsync();
+
+   
+
+
         return result > 0 
-            ? CreatedAtAction(nameof(GetAuctionById),new {auction.Id}, _mapper.Map<AuctionDto>(auction))
+            ? CreatedAtAction(nameof(GetAuctionById),new {auction.Id}, newAuction)
             : BadRequest("Something wrong with saving");
     }
+
+
+
+
 
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAuction(Guid id,UpdateAuctionDto updateAuctionDto)
