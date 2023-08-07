@@ -14,6 +14,10 @@ public class MappingProfiles : Profile
         CreateMap<CreateAuctionDto, Auction>()
             .ForMember(d => d.Motorcycle, o => o.MapFrom(s => s));
         CreateMap<CreateAuctionDto, Motorcycle>();
+        CreateMap<Auction,AuctionUpdated>().IncludeMembers(m=>m.Motorcycle);
+        CreateMap<Motorcycle,AuctionUpdated>();
+        CreateMap<AuctionUpdated,Motorcycle>();
+
 
         CreateMap<UpdateAuctionDto, Auction>()
             .ForMember(d => d.Motorcycle, o => o.MapFrom(s => s));

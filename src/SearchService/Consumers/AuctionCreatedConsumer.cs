@@ -20,6 +20,8 @@ public class AuctionCreatedConsumer : IConsumer<AuctionCreated>
 
         var item = _mapper.Map<Motorcycle>( context.Message );
 
+        if (item.Model == "Foo") throw new ArgumentException("cannot have name Foo");
+
         await item.SaveAsync();
     }
 }

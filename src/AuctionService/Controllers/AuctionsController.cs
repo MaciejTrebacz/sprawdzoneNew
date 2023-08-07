@@ -89,6 +89,10 @@ public class AuctionsController : ControllerBase
         if (auctionToUpdate == null) return NotFound();
 
         _mapper.Map(updateAuctionDto, auctionToUpdate);
+
+        var auctionToSend = _mapper.Map<AuctionUpdated>(auctionToUpdate);
+        await _publishEndpoint.Publish(auctionToSend);
+
         var result = await _context.SaveChangesAsync();
 
         return result > 0
