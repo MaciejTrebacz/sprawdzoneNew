@@ -1,19 +1,39 @@
-import React from 'react';
+'use client'
 
-async function getData() {
-    const res = await fetch('http://localhost:6001/search')
-    if (!res.ok) throw new Error('Failed to fetch data')
+import React, {useEffect, useState} from 'react';
+import AuctionCard from "@/app/auctions/AuctionCard";
+import AppPagination from "@/app/components/AppPagination";
+import {getData} from "@/app/actions/auctionAction";
+import {Auction} from "@/types";
 
-    return res.json()
-}
 
-async function Listings() {
-    const data = await getData()
+ function Listings() {
+     const [auctions, setAuctions] = useState<Auction[]>([])
+     const [pageCount, setPageCount] = useState(0)
+     const [pageNumber, setPageNumber] = useState(1)
 
-    return (
-        <div>
-            {JSON.stringify(data,null,2)}
-        </div>
+     useEffect(() => {
+         getData(pageNumber).then(data=>{
+             setAuctions(data.listOfMotorcycles)
+             setPageCount(data.pageCount)
+         })
+     }, [pageNumber]);
+
+     if (auctions.length ===0) return <h3>Loading....</h3>
+
+     return (
+        <>       
+            <div className={'grid grid-cols-4 gap-6'}>
+                {auctions.map(auction=>(
+                    <AuctionCard auction={auction} key={auction.id}/>
+                ))}
+            </div>
+            <div className={'inline-flex space-x-4 p-1 justify-center mt-9'}>
+                <AppPagination pageChanged={setPageNumber} currentPage={pageNumber} pageCount={pageCount}/>
+            </div>
+            
+        </>
+ 
     );
 }
 
