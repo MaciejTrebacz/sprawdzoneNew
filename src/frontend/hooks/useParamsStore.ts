@@ -7,6 +7,7 @@ type State ={
     searchTerm: string
     searchValue:string
     searchBy: string
+    filterBy: string
 }
 
 type Actions={
@@ -22,6 +23,7 @@ const initialState :State ={
     searchTerm: "",
     searchValue: "",
     searchBy:"make",
+    filterBy:"live"
 }
 
 export const useParamsStore= create<State &Actions>()((set)=>({

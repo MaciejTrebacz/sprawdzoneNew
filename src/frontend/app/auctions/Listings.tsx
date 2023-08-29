@@ -9,6 +9,7 @@ import Filters from './Filters';
 import {useParamsStore} from "@/hooks/useParamsStore";
 import {shallow} from "zustand/shallow";
 import qs from 'query-string'
+import EmptyFilter from "@/app/components/EmptyFilter";
 
 
  function Listings() {
@@ -18,6 +19,7 @@ import qs from 'query-string'
          pageSize: state.pageSize,
          searchTerm: state.searchTerm,
          orderBy: state.searchBy,
+         filterBy: state.filterBy,
 
      }),shallow) // give us all params in single object
      // this is the way to get all nesesery variables we could go with state=>state to get it all
@@ -35,21 +37,26 @@ import qs from 'query-string'
      },[url]);
 
      if (!data) return <h3>Loading....</h3>
-
+     
      return (
         <>     
-         <Filters/>    
-            <div className={'grid grid-cols-4 gap-6'}>
-                {data.listOfMotorcycles.map(auction=>(
-                    <AuctionCard auction={auction} key={auction.id}/>
-                ))}
-            </div>
-            <div className={'inline-flex space-x-4 p-1 justify-center mt-9'}>
-                <AppPagination pageChanged={setPageNumber} 
-                               currentPage={params.pageNumber} 
-                               pageCount={data.pageCount}/>
-            </div>
-            
+         <Filters/>
+            {data.totalCount ===0 
+                ? (
+                <EmptyFilter showReset />
+            )   : <>
+                    <div className={'grid grid-cols-4 gap-6'}>
+                        {data.listOfMotorcycles.map(auction=>(
+                            <AuctionCard auction={auction} key={auction.id}/>
+                        ))}
+                    </div>
+                    <div className={'inline-flex space-x-4 p-1 justify-center mt-9'}>
+                        <AppPagination pageChanged={setPageNumber}
+                                       currentPage={params.pageNumber}
+                                       pageCount={data.pageCount}/>
+                    </div>
+                </>
+            }
         </>
  
     );

@@ -4,7 +4,8 @@ import React from 'react';
 import {useParamsStore} from "@/hooks/useParamsStore";
 import {shallow} from "zustand/shallow";
 import {AiOutlineClockCircle, AiOutlineSortAscending} from "react-icons/ai";
-import {BsFillStopCircleFill} from "react-icons/bs";
+import {BsFillStopCircleFill, BsStopwatchFill} from "react-icons/bs";
+import {GiFinishLine, GiFlame} from "react-icons/gi";
 
 const pageSizeButtons =[4,8,12]
 const orderButtons = [{
@@ -24,14 +25,51 @@ const orderButtons = [{
     },
 ]
 
+const filterButtons = [{
+    label: 'Live Auctions',
+    icon: GiFlame,
+    value:'live'
+    },
+    {
+        label: 'Ending <6h',
+        icon: GiFinishLine,
+        value:'endingSoon'
+    },
+    {
+        label: 'Completed',
+        icon: BsStopwatchFill,
+        value:'finished'
+    },
+]
+
 function Filters() {
     const pageSize = useParamsStore(state => state.pageSize)
     const setParams = useParamsStore(state=> state.setParams)
     const searchBy = useParamsStore(state=> state.searchBy)
+    const filterBy = useParamsStore(state=> state.filterBy)
 
     
     return (
         <div className={'flex justify-between items-center mb-4'}>
+            <div>
+                <span className="uppercase text-sm text-gray-500 mr-2">Filter By</span>
+                <ButtonGroup>
+                    {filterButtons.map(({label,icon:Icon,value})=>(
+                        <Button
+                            key={value}
+                            onClick={()=>setParams({filterBy:value})}
+                            color={`${filterBy ===value ? 'red' : 'grey'}`}
+                        >
+                            <Icon className={'mr-3 h-4 w-4'}/>
+                            {label}
+                        </Button>
+                    ))}
+                </ButtonGroup>
+
+            </div>
+            
+            
+            
             <div>
                 <span className="uppercase text-sm text-gray-500 mr-2">Page Size</span>
                 <ButtonGroup>
