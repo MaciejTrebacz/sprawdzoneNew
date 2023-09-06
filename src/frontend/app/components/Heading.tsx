@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 
 type Props = {
-    title: string
-    subtitle: string
+    title?: string
+    subtitle?: string
     center? : boolean
 }
 
