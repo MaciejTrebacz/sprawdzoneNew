@@ -20,6 +20,9 @@ import EmptyFilter from "@/app/components/EmptyFilter";
          searchTerm: state.searchTerm,
          orderBy: state.searchBy,
          filterBy: state.filterBy,
+         seller: state.seller,
+         winner: state.winner,
+
 
      }),shallow) // give us all params in single object
      // this is the way to get all nesesery variables we could go with state=>state to get it all
