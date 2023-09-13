@@ -15,17 +15,18 @@ public class Seeder
     {
             sprawdzoneDbContext.Database.Migrate(); // apply migration if needed
 
-            if (sprawdzoneDbContext.Auctions.Count() > 3)
+            if (sprawdzoneDbContext.Auctions.Count() > 1)
             {
                 Console.WriteLine("Already have data");
                 return;
             }
 
+            Console.WriteLine("updating");
             var auctions = new List<Auction>()
             {
             new Auction
             {
-                Id = Guid.Parse("afbee524-5972-4075-8800-7d1f9d7b0a0c"),
+                Id = new Guid(),
                 Status = Status.Live,
                 ReservePrice = 20000,
                 Seller = "bob",
@@ -49,7 +50,7 @@ public class Seeder
 
             new Auction
             {
-                Id = Guid.Parse("c8c3ec17-01bf-49db-82aa-1ef80b833a9f"),
+                Id = new Guid(),
                 Status = Status.Live,
                 ReservePrice = 90000,
                 Seller = "alice",
@@ -72,7 +73,7 @@ public class Seeder
             },           
             new Auction
             {
-                Id = Guid.Parse("c8c3ec17-01bf-49db-82aa-1ef80b833a88"),
+                Id = new Guid(),
                 Status = Status.Live,
                 ReservePrice = 90000,
                 Seller = "alice",

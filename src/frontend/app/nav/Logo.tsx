@@ -21,7 +21,7 @@ function Logo() {
     return (
         <div onClick={doReset} className={'cursor-pointer flex items-center gap-2 text-3xl font-semibold text-red-500'}>
             <PiMotorcycleFill size={34}/>
-            <div>Sprawdzone.pl{pathname}</div>
+            <div>Sprawdzone.pl</div>
         </div>
     );
 }
