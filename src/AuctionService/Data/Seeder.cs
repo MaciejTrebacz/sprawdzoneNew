@@ -15,12 +15,11 @@ public class Seeder
     {
             sprawdzoneDbContext.Database.Migrate(); // apply migration if needed
 
-            if (sprawdzoneDbContext.Auctions.Count() > 1)
+            if (sprawdzoneDbContext.Auctions.Count() > 5)
             {
                 Console.WriteLine("Already have data");
                 return;
             }
-
             Console.WriteLine("updating");
             var auctions = new List<Auction>()
             {

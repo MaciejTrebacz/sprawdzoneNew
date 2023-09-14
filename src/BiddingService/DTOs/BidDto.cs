@@ -1,6 +1,8 @@
-﻿namespace Contracts;
+﻿using BiddingService.Models;
 
-public class BidPlaced
+namespace BiddingService.DTOs;
+
+public class BidDto
 {
     public string Id { get; set; }
     public string AuctionId { get; set; }
@@ -9,4 +11,3 @@ public class BidPlaced
     public int Amount { get; set; }
     public string BidStatus { get; set; }
 }
-

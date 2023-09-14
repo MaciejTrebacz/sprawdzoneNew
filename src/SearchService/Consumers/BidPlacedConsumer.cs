@@ -14,7 +14,7 @@ public class BidPlacedConsumer : IConsumer<BidPlaced>
         var motorcycle = await DB.Find<Motorcycle>().OneAsync(context.Message.AuctionId) ;
 
 
-        if (context.Message.BidStatus == BidStatus.Accepted
+        if (context.Message.BidStatus.Contains("Accepted")
             && context.Message.Amount > motorcycle.CurrentHighBid)
         {
             motorcycle.CurrentHighBid = context.Message.Amount;
