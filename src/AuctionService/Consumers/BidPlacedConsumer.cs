@@ -1,5 +1,4 @@
 ﻿using AuctionService.Data;
-using BiddingService.Models;
 using Contracts;
 using MassTransit;
 
@@ -17,8 +16,9 @@ public class BidPlacedConsumer : IConsumer<BidPlaced>
     {
         Console.WriteLine($"Consuming bid placed of ID: {context.Message.AuctionId} for amount {context.Message.Amount}");
 
-        var auction = await _sprawdzoneDbContext.Auctions.FindAsync(Guid.Parse(context.Message.Id));
-
+        var id = Guid.Parse(context.Message.AuctionId);
+        var auction = await _sprawdzoneDbContext.Auctions.FindAsync(Guid.Parse(context.Message.AuctionId));
+        
         if (auction is null) return;
 
         if (auction.CurrentHighBid is null 
