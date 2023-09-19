@@ -1,8 +1,9 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+﻿FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
 EXPOSE 80
 
 # copy all .csproj files and restore as distinct layers.Use of the sam dockerfile in the project to take advantage of docker caching
+
 
 COPY Sprawdzone.pl.sln Sprawdzone.pl.sln
 COPY src/AuctionService/AuctionService.csproj src/AuctionService/AuctionService.csproj
@@ -20,9 +21,9 @@ RUN dotnet restore Sprawdzone.pl.sln
 # Copy the app folder over
 
 
-COPY src/SearchService src/SearchService
+COPY src/BiddingService src/BiddingService
 COPY src/Contracts src/Contracts
-WORKDIR /app/src/SearchService
+WORKDIR /app/src/BiddingService
 RUN dotnet publish -c Release -o /app/src/out
 
 # Build runtime image
@@ -30,4 +31,4 @@ RUN dotnet publish -c Release -o /app/src/out
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 COPY --from=build /app/src/out .
-ENTRYPOINT ["dotnet", "SearchService.dll"]
+ENTRYPOINT ["dotnet", "BiddingService.dll"]
