@@ -10,10 +10,12 @@ import {useParamsStore} from "@/hooks/useParamsStore";
 import {shallow} from "zustand/shallow";
 import qs from 'query-string'
 import EmptyFilter from "@/app/components/EmptyFilter";
+import {useAuctionStore} from "@/hooks/useAuctionStore";
 
 
  function Listings() {
-     const [data,setData] = useState<PagedResult<Auction>>()
+     const [loading, setLoading] = useState(true)
+
      const params = useParamsStore(state => ({
          pageNumber: state.pageNumber,
          pageSize: state.pageSize,
@@ -22,10 +24,16 @@ import EmptyFilter from "@/app/components/EmptyFilter";
          filterBy: state.filterBy,
          seller: state.seller,
          winner: state.winner,
-
-
      }),shallow) // give us all params in single object
      // this is the way to get all nesesery variables we could go with state=>state to get it all
+     
+     const data = useAuctionStore(state=>({
+         listOfMotorcycles: state.listOfMotorcycles,
+         totalCount: state.totalCount,
+         pageCount: state.pageCount
+     }),shallow);
+     const setData = useAuctionStore(state => state.setData)
+     
      const setParams = useParamsStore(state=>state.setParams)
      const url = qs.stringifyUrl({url: '',query:params})
 
@@ -36,10 +44,11 @@ import EmptyFilter from "@/app/components/EmptyFilter";
      useEffect(() => {
          getData(url).then(data=>{
              setData(data)
+             setLoading(false)
          })
      },[url]);
 
-     if (!data) return <h3>Loading....</h3>
+     if (loading) return <h3>Loading....</h3>
      
      return (
         <>     
