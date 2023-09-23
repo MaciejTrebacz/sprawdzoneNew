@@ -1,5 +1,5 @@
 import React from 'react';
-import {getDetailedViewData} from "@/app/actions/auctionAction";
+import {getBidForAuction, getDetailedViewData} from "@/app/actions/auctionAction";
 import Heading from "@/app/components/Heading";
 import {CountdownTimer} from "@/app/auctions/CountdownTimer";
 import MotorcycleImage from "@/app/auctions/MotorcycleImage";
@@ -7,6 +7,8 @@ import DetailedSpecs from "@/app/auctions/details/[id]/DetailedSpecs";
 import {getCurrentUser} from "@/app/actions/authActions";
 import EditButton from "@/app/auctions/details/[id]/EditButton";
 import DeleteButton from "@/app/auctions/details/[id]/DeleteButton";
+import BidItem from "@/app/auctions/details/[id]/BidItem";
+import BidList from "@/app/auctions/details/[id]/BidList";
 
 async function Details({params} : {params: {id:string}}) {
     const motorcycleAuction = await getDetailedViewData(params.id)
@@ -36,10 +38,8 @@ async function Details({params} : {params: {id:string}}) {
                 <div className="w-full bg-gray-200 aspect-h-10 aspect-w-16 rounded-lg overflow-hidden">
                     <MotorcycleImage imageUrl={motorcycleAuction.imageUrl}/>
                 </div>
-
-                <div className="border-2 rounded-lg p-2 bg-gray-100">
-                    <Heading title={'bids'}/>
-                </div>
+            <BidList user={user} auction={motorcycleAuction}/>
+            
             </div>
             <div className="mt-3 grid grid-cols-1 rounded-lg">
                 <DetailedSpecs auction={motorcycleAuction}/>

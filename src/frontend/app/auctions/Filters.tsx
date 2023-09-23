@@ -44,11 +44,12 @@ const filterButtons = [{
 
 function Filters() {
     const pageSize = useParamsStore(state => state.pageSize)
-    const setParams = useParamsStore(state=> state.setParams)
     const searchBy = useParamsStore(state=> state.searchBy)
     const filterBy = useParamsStore(state=> state.filterBy)
-
     
+    const setParams = useParamsStore(state=> state.setParams)
+
+
     return (
         <div className={'flex justify-between items-center mb-4'}>
             <div>

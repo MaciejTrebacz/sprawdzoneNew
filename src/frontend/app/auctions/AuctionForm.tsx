@@ -29,7 +29,7 @@ function AuctionForm({auctionToUpdate}: Props) {
         }
 
         setFocus('make')}
-        ,[setFocus,reset])
+        ,[setFocus,reset,auctionToUpdate])
 
     async function onSubmit(data:FieldValues){
         try {
