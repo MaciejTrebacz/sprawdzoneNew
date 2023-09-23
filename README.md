@@ -12,14 +12,15 @@ provides thorough reviews to assist customers making informed bids with confiden
 
 <h3> Web app features </h3>
 <ul>
+<li>Microservices app with .Net and NextJS</li>
 <li>Users can perform CRUD operations on Auctions</li>
 <li>User registration and authentication</li>
 <li>Bidding on motorcycles</li>
 <li>Participants can use live chat for each event.</li>
 <li>Real-time auction updates</li>
-<li>Admin panel for managing users and listings</li>
+<li>Admin panel for managing users and listings [IN PROGRESS]</li>
 <li>User profiles and transaction history</li>
-<li>Generating motorcycle raports</li>
+<li>Generating motorcycle raports [IN PROGRESS]</li>
 
 </ul>
 
@@ -39,4 +40,25 @@ provides thorough reviews to assist customers making informed bids with confiden
 
 </ul>
 <br><br>
+
+# Getting Started
+
+Clone this repository.
+```
+git clone https://github.com/MaciejTrebacz/sprawdzoneNew.git
+```
+
+Make sure you have installed Docker on your computer. After that, you can run the below command from the `/sprawdzoneNew/` directory and get started with the `Sprawdzone.pl` immediately.
+```gitbash
+docker compose up
+```
+
+You should be able to browse the application by using the below URL:
+```
+http://localhost:3000
+```
+
+PUBLISHING APP ON KUBERNETES IN PROGRESS
+
+
 
