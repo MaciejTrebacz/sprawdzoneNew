@@ -1,53 +1,45 @@
-<h1>Sprawdzone.pl</h1>
+# Sprawdzone.pl
 
-![logo](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/f4c54675-df33-47d9-87e8-be96217f8a20)
+![Logo](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/f4c54675-df33-47d9-87e8-be96217f8a20)
 
+## Elevating motorcycle auction experience for an auction platform where the community of users provides thorough reviews to assist customers in making informed bids with confidence.
 
-<h2>Elevating motorcycle auction experience for auction platform where community of users
-provides thorough reviews to assist customers making informed bids with confidence.</h2>
+- **Search service using MongoDB for querying and MassTransit for communication**
+  ![Sprawdzone](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/8f1203ad-8cf3-4ac3-8b69-ddcbc6a54473)
 
-  <b>Search service using mongoDB and masstransit for comunication </b>
-  ![sprawdzone](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/8f1203ad-8cf3-4ac3-8b69-ddcbc6a54473)
-
-  <b>Bidding Service using SignalR for real-time updates</b>
+- **Bidding Service using SignalR for real-time updates**
   ![Screenshot_4](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/e882d544-9cc8-4cac-9d28-a3eac809f247)
 
+## Web App Features
 
+- Microservices app with .NET and Next.js
+- Users can perform CRUD operations on Auctions
+- User registration and authentication
+- Bidding Service using SignalR for real-time updates
+- Participants can use live chat for each event.
+- Admin panel for managing users and listings [IN PROGRESS]
+- User profiles and transaction history
+- Generating motorcycle reports [IN PROGRESS]
 
-<h3> Web app features </h3>
-<ul>
-<li>Microservices app with .Net and NextJS</li>
-<li>Users can perform CRUD operations on Auctions</li>
-<li>User registration and authentication</li>
-<li>Bidding Service using SignalR for real-time updates</li>
-<li>Participants can use live chat for each event.</li>
-<li>Admin panel for managing users and listings [IN PROGRESS]</li>
-<li>User profiles and transaction history</li>
-<li>Generating motorcycle raports [IN PROGRESS]</li>
+## Used Technologies
 
-</ul>
+- C#
+- .NET
+- React
+- TypeScript
+- NEXT.js
+- MassTransit
+- RabbitMQ
+- MongoDB
+- Postgres
+- SignalR
+- Docker
+- SQL Server
 
-<h3> Used technologies </h3>
-<ul>
-<li>C#</li>
-<li>.NET</li>
-<li>React</li>
-<li>TypeScript</li>
-<li>NEXT.js</li>
-<li>Masstransit</li>
-<li>RabbitMQ</li>
-<li>MongoDB</li>
-<li>Postgres</li>
-<li>SignalR</li>
-<li>Docker</li>
-<li>SqlServer</li>
+## Getting Started
 
-</ul>
-<br><br>
+1. Clone this repository:
 
-# Getting Started
-
-Clone this repository.
 ```
 git clone https://github.com/MaciejTrebacz/sprawdzoneNew.git
 ```
@@ -62,7 +54,6 @@ You should be able to browse the application by using the below URL:
 http://localhost:3000
 ```
 
-PUBLISHING APP ON KUBERNETES IN PROGRESS
-
+Note: Publishing the app on Kubernetes is in progress.
 
 
