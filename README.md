@@ -13,6 +13,8 @@
   ![Screenshot_4](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/e882d544-9cc8-4cac-9d28-a3eac809f247)
 
 - **Using background service to update finished auctions, synchronizing auctions using gRPC**
+- **Running localy microservice aplication with identity duende server from docker container using secure connection**
+  ![adress](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/1686d1bd-0524-4d91-b56c-e0ae0e9f6736)
 
 ## Web App Features
 
