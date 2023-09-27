@@ -1,4 +1,11 @@
----
+networks:
+  custom:
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
+
+
 services:
   postgres:
     image: postgres
@@ -8,6 +15,8 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      custom:
   mongodb:
     image: mongo
     environment:
@@ -17,11 +26,15 @@ services:
       - 27017:27017
     volumes:
       - mongodata:/var/lib/mongodb/data
+    networks: 
+      custom:
   rabbitmq:
     image: rabbitmq:3-management-alpine
     ports: 
       - 5672:5672
       - 15672:15672
+    networks:
+      custom:
   auction-svc:
     image: quattroworld/auction-svc:latest
     build: 
@@ -44,6 +57,8 @@ services:
     depends_on:
         - postgres
         - rabbitmq
+    networks:
+      custom:
   search-svc:
     image: quattroworld/search-svc:latest
     build: 
@@ -60,6 +75,8 @@ services:
     depends_on:
         - mongodb
         - rabbitmq
+    networks:
+      custom:
   identity-svc:
     image: quattroworld/identity-svc:latest
     build: 
@@ -68,12 +85,15 @@ services:
     environment:
         - ASPNETCORE_ENVIRONMENT=Docker
         - ASPNETCORE_URLS=http://+:80
+        - ClientApp=http://app.mojesprawdzone.pl
         - ConnectionStrings__DefaultConnection=Server=postgres:5432;User Id=postgres;Password=thailand22Thailand22;Database=identity
-    ports:
-        - 5000:80
+        - VIRTUAL_HOST=id.mojesprawdzone.pl
     depends_on:
         - postgres
         - rabbitmq
+    networks:
+      custom:
+        ipv4_address: 10.5.0.200
   gateway-svc:
     image: quattroworld/gateway-svc:latest
     build: 
@@ -82,9 +102,10 @@ services:
     environment:
         - ASPNETCORE_ENVIRONMENT=Docker
         - ASPNETCORE_URLS=http://+:80
- 
-    ports:
-        - 6001:80
+        - VIRTUAL_HOST=api.sprawdzone.pl
+        - ClientApp=https://app.mojesprawdzone.pl
+    networks:
+      custom:
   bid-svc:
     image: quattroworld/bid-svc:latest
     build:
@@ -102,6 +123,8 @@ services:
     depends_on:
       - mongodb
       - rabbitmq
+    networks:
+      custom:
   notify-svc:
     image: quattroworld/notify-svc:latest
     build:
@@ -115,6 +138,8 @@ services:
       - 7004:80
     depends_on:
       - rabbitmq
+    networks:
+      custom:
   web-app:
     image: quattroworld/web-app
     build:
@@ -122,15 +147,29 @@ services:
       dockerfile: src/frontend/Dockerfile
     volumes:
       - /var/lib/web/data
-    ports:
-      - 3000:3000
+    extra_hosts: 
+      - id.mojesprawdzone.pl:10.5.0.200
     environment:
       - NEXTAUTH_SECRET=somethingreallyreallysecret
-      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_URL=http://app.mojesprawdzone.pl
       - NEXTAUTH_URL_INTERNAL=http://web-app:3000
       - API_URL=http://gateway-svc/
-      - ID_URL=http://identity-svc
+      - ID_URL=http://id.mojesprawdzone.pl
       - NEXT_PUBLIC_NOTIFY_URL=http://gateway-svc/notifications
+      - VIRTUAL_HOST=app.mojesprawdzone.pl
+      - VIRTUAL_PORT=3000
+    networks:
+      custom:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    networks: 
+      custom:
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./devcerts:/etc/nginx/certs
 volumes:
   pgdata:
   mongodata:
