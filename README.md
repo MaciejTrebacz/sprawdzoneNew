@@ -10,6 +10,8 @@
 - **Bidding Service using SignalR for real-time updates**
   ![Screenshot_4](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/e882d544-9cc8-4cac-9d28-a3eac809f247)
 
+- ** Using background service to check finished auctions 
+
 ## Web App Features
 
 - Microservices app with .NET and Next.js
@@ -51,7 +53,7 @@ docker compose up
 
 You should be able to browse the application by using the below URL:
 ```
-http://localhost:3000
+https://mojesprawdzone.pl
 ```
 
 Note: Publishing the app on Kubernetes is in progress.
