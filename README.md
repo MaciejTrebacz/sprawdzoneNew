@@ -1,12 +1,16 @@
 <h1>Sprawdzone.pl</h1>
 
-![logo](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/d73ac931-e95f-4125-afc8-dbc33013179a)
+![logo](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/f4c54675-df33-47d9-87e8-be96217f8a20)
 
 
 <h2>Elevating motorcycle auction experience for auction platform where community of users
 provides thorough reviews to assist customers making informed bids with confidence.</h2>
 
-![sprawdzone](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/8f1203ad-8cf3-4ac3-8b69-ddcbc6a54473)
+  <b>Search service using mongoDB and masstransit for comunication </b>
+  ![sprawdzone](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/8f1203ad-8cf3-4ac3-8b69-ddcbc6a54473)
+
+  <b>Bidding Service using SignalR for real-time updates</b>
+  ![Screenshot_4](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/e882d544-9cc8-4cac-9d28-a3eac809f247)
 
 
 
@@ -15,9 +19,8 @@ provides thorough reviews to assist customers making informed bids with confiden
 <li>Microservices app with .Net and NextJS</li>
 <li>Users can perform CRUD operations on Auctions</li>
 <li>User registration and authentication</li>
-<li>Bidding on motorcycles</li>
+<li>Bidding Service using SignalR for real-time updates</li>
 <li>Participants can use live chat for each event.</li>
-<li>Real-time auction updates</li>
 <li>Admin panel for managing users and listings [IN PROGRESS]</li>
 <li>User profiles and transaction history</li>
 <li>Generating motorcycle raports [IN PROGRESS]</li>
@@ -35,6 +38,7 @@ provides thorough reviews to assist customers making informed bids with confiden
 <li>RabbitMQ</li>
 <li>MongoDB</li>
 <li>Postgres</li>
+<li>SignalR</li>
 <li>Docker</li>
 <li>SqlServer</li>
 
