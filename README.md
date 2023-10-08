@@ -66,12 +66,8 @@ https://www.hostinger.com/tutorials/how-to-edit-hosts-file
 ```
 End of you "hosts" file should look like this:
 
-```
+
 ![Screenshot_1](https://github.com/MaciejTrebacz/sprawdzoneNew/assets/106514256/cbe92e3c-f96c-4bf7-ac7f-1de636f04092)
-
-```
-
-
 
 
 Make sure you have installed Docker on your computer. After that, you can run the below command from the `/sprawdzoneNew/` directory and get started with the `Sprawdzone.pl` immediately.
