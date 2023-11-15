@@ -13,26 +13,25 @@ public class Seeder
 
     private static void SeedData(SprawdzoneDbContext sprawdzoneDbContext)
     {
-            sprawdzoneDbContext.Database.Migrate(); // apply migration if needed
-
-            if (sprawdzoneDbContext.Auctions.Any())
-            {
-                Console.WriteLine("Already have data");
-                return;
-            }
-
-            var auctions = new List<Auction>()
+        sprawdzoneDbContext.Database.Migrate(); // apply migration if needed
+        if (sprawdzoneDbContext.Auctions.Any())
+        {
+            Console.WriteLine("Cleaning the database...");
+            sprawdzoneDbContext.Auctions.RemoveRange(sprawdzoneDbContext.Auctions);
+        }
+        Console.WriteLine("updating");
+        var auctions = new List<Auction>()
             {
             new Auction
             {
-                Id = Guid.Parse("afbee524-5972-4075-8800-7d1f9d7b0a0c"),
+                Id = new Guid(),
                 Status = Status.Live,
                 ReservePrice = 20000,
                 Seller = "bob",
                 AuctionEnd = DateTime.UtcNow.AddDays(10),
                 Motorcycle = new Motorcycle
                 {
-                    Make = "MvAgusta",
+                    Make = "MV Agusta",
                     Model = "Rush",
                     Color = "Black",
                     Mileage = 0,
@@ -49,7 +48,7 @@ public class Seeder
 
             new Auction
             {
-                Id = Guid.Parse("c8c3ec17-01bf-49db-82aa-1ef80b833a9f"),
+                Id = new Guid(),
                 Status = Status.Live,
                 ReservePrice = 90000,
                 Seller = "alice",
@@ -70,12 +69,103 @@ public class Seeder
 
                 }
             },
-           
-            
+            new Auction
+            {
+                Id = new Guid(),
+                Status = Status.Live,
+                ReservePrice = 90000,
+                Seller = "alice",
+                AuctionEnd = DateTime.UtcNow.AddDays(60),
+                Motorcycle = new Motorcycle
+                {
+                    Make = "Aprilla",
+                    Model = "Tuono",
+                    Color = "Black",
+                    Mileage = 9999,
+                    Year = 2023,
+                    ImageUrl = "https://wlassets.aprilia.com/wlassets/aprilia/master/Range/tuono_v4/models_page/Tuono-V4-1100-Factory/2023/Aprilia_TuonoV4_Factory_website-2023_Box_900x675_1/original/Aprilia_TuonoV4_Factory_website-2023_Box_900x675_1.jpg",
+                    Displacement = 1077,
+                    FunFactor = 10,
+                    HorsePower = 175,
+                    Torque = 121,
+                    MotorcycleType = MotorcycleType.HyperNaked,
+
+                }
+            },
+            new Auction
+            {
+                Id = new Guid(),
+                Status = Status.Live,
+                ReservePrice = 90000,
+                Seller = "alice",
+                AuctionEnd = DateTime.UtcNow.AddDays(60),
+                Motorcycle = new Motorcycle
+                {
+                    Make = "BMW",
+                    Model = "S1000XR",
+                    Color = "White/Red",
+                    Mileage = 198,
+                    Year = 2023,
+                    ImageUrl = "https://ultimatemotorcycling.com/wp-content/uploads/2020/08/2021-BMW-S-1000-XR-First-Look-adventure-sport-touring-adv-motorcycle-featured-scaled.jpg",
+                    Displacement = 999,
+                    FunFactor = 9,
+                    HorsePower = 121,
+                    Torque = 114,
+                    MotorcycleType = MotorcycleType.Touring,
+
+                }
+            },
+            new Auction
+            {
+                Id = new Guid(),
+                Status = Status.Live,
+                ReservePrice = 90000,
+                Seller = "alice",
+                AuctionEnd = DateTime.UtcNow.AddDays(60),
+                Motorcycle = new Motorcycle
+                {
+                    Make = "MV Agusta",
+                    Model = "Brutale",
+                    Color = "Black/Red",
+                    Mileage = 250,
+                    Year = 2021,
+                    ImageUrl = "https://www.mvagusta.com/images/main/brutale-xl.png",
+                    Displacement = 798,
+                    FunFactor = 9,
+                    HorsePower = 112,
+                    Torque = 70,
+                    MotorcycleType = MotorcycleType.Naked,
+
+                }
+            },
+            new Auction{
+                Id = new Guid(),
+                Status = Status.Live,
+                ReservePrice = 90000,
+                Seller = "alice",
+                AuctionEnd = DateTime.UtcNow.AddDays(60),
+                Motorcycle = new Motorcycle
+                {
+                    Make = "MV Agusta",
+                    Model = "Brutale 1000rr",
+                    Color = "Black/Red",
+                    Mileage = 250,
+                    Year = 2021,
+                    ImageUrl = "https://motogen.pl/wp-content/uploads/2019/12/mv2-640x400.jpg",
+                    Displacement = 1000,
+                    FunFactor = 10,
+                    HorsePower = 208,
+                    Torque = 120,
+                    MotorcycleType = MotorcycleType.HyperNaked,
+
+                }
+            },
+
+
             };
 
-            sprawdzoneDbContext.AddRange(auctions);
-            sprawdzoneDbContext.SaveChanges();
+        sprawdzoneDbContext.AddRange(auctions);
+        sprawdzoneDbContext.SaveChanges();
 
     }
 }
