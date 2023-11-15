@@ -8,15 +8,10 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<Auction, AuctionDto>().IncludeMembers(x => x.Motorcycle);
-        CreateMap<Motorcycle, AuctionDto>();
-        CreateMap<CreateAuctionDto, Auction>()
-            .ForMember(d => d.Motorcycle, o => o.MapFrom(s => s));
+        CreateMap<Auction,AuctionDto>().IncludeMembers(x=>x.Motorcycle);
+        CreateMap<Motorcycle,AuctionDto>();
+        CreateMap<CreateAuctionDto, Auction>().ForMember(d => d.Motorcycle, o => o.MapFrom(s => s));
         CreateMap<CreateAuctionDto, Motorcycle>();
-
-        CreateMap<UpdateAuctionDto, Auction>()
-            .ForMember(d => d.Motorcycle, o => o.MapFrom(s => s));
-        CreateMap<UpdateAuctionDto, Motorcycle>();
     }
     
 }
