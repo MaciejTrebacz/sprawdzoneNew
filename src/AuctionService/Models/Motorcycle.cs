@@ -6,7 +6,7 @@ namespace AuctionService.Models;
 [Table("Motorcycles")]
 public class Motorcycle : Vehicle
 {
-    public int? FunFactor { get; set; }
+    public int FunFactor { get; set; }
     public MotorcycleType MotorcycleType { get; set; }
 
     // navigation properties

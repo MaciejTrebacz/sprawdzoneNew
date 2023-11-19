@@ -6,7 +6,7 @@ services:
         ports:
             - 5430:5432
         volumes:
-            - pgdata:/var/lib/postgresql/data 
+            - /var/lib/postgresql/data 
     mongodb:
         image: mongo
         environment:
@@ -15,8 +15,12 @@ services:
         ports:
            - 27017:27017
         volumes:
-           - mongodata:/var/lib/mongodb/data
-volumes:
-    pgdata:
-    mongodata:
+           - /var/lib/mongodb/data
+    rabbitmq:
+        image: rabbitmq:management-alpine
+        ports:
+           - 5672:5672
+           - 8080:15672 
 
+
+            
